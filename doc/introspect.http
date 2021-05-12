@@ -1,0 +1,25 @@
+@NORMAL_SERVICE = http://localhost:8081
+@AUTHENTICATE_ENDPOINT = http://localhost:8080/authenticate
+
+### Case 01: Access unprotected endpoint - expected success
+GET {{NORMAL_SERVICE}}/unprotected
+
+### Case 02: Access protected endpoint with no Authorization header - expected 403
+GET {{NORMAL_SERVICE}}/protected
+
+### Case 03: Access protected endpoint with invalid Authorization header - expected 403
+GET {{NORMAL_SERVICE}}/protected
+Authorization: Bearer 1234567890
+
+### Case 04: Access authentication endpoint to get token
+POST {{AUTHENTICATE_ENDPOINT}}
+content-type: application/json
+
+{
+    "username": "bar",
+    "password": "foo"
+}
+
+### Case 05: Access protected endpoint - expected success
+GET {{NORMAL_SERVICE}}/protected
+Authorization: Bearer 

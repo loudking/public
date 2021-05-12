@@ -1,0 +1,28 @@
+@AUTHENTICATE_ENDPOINT = http://localhost:8080/authenticate
+
+### Case 01: Authenticate Failure - invalid username
+POST {{AUTHENTICATE_ENDPOINT}}
+content-type: application/json
+
+{
+    "username": "abc",
+    "password": "def"
+}
+
+### Case 02: Authenticate Failure - invalid password
+POST {{AUTHENTICATE_ENDPOINT}}
+content-type: application/json
+
+{
+    "username": "foo",
+    "password": "xyz"
+}
+
+### Case 03: Authenticate success
+POST {{AUTHENTICATE_ENDPOINT}}
+content-type: application/json
+
+{
+    "username": "foo",
+    "password": "bar"
+}
